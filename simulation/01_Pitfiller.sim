@@ -1,0 +1,29 @@
+// Pitfiller - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components {  
+            "reader_dem"    "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "pit"           "org.jgrasstools.hortonmachine.modules.demmanipulation.pitfiller.OmsPitfiller"
+            "writer_pit"    "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"      
+        }
+
+        parameter{  
+            "reader_dem.file"     "data/DEM_Meledrio.tif"
+            "writer_pit.file"     "output_tiff/DEM_pitfiller.tif"
+        }
+
+        connect {
+            "reader_dem.outRaster"       "pit.inElev"
+            "pit.outPit"                 "writer_pit.inRaster"
+        }
+    
+    }
+
+}

@@ -1,0 +1,25 @@
+// Test reader raster map
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components {  
+            "reader"    "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+		}
+
+        parameter{  
+            "reader.file"     "output/DEM_pitfiller.asc"
+		}
+
+        connect {
+
+        }
+    
+    }
+
+}

@@ -1,0 +1,29 @@
+// FlowDirections - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+ 
+       components {
+           "reader_pit"        "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+           "flowDirections"    "org.jgrasstools.hortonmachine.modules.geomorphology.flow.OmsFlowDirections"
+           "writer_flow"       "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+       }
+
+       parameter{
+           "reader_pit.file"    "output/DEM_pitfiller.asc"
+           "writer_flow.file"	  "output/flow_dir.asc"
+       }
+
+       connect {
+           "reader_pit.outRaster"     "flowDirections.inPit"
+           "flowDirections.outFlow"	  "writer_flow.inRaster"
+       }
+
+    }
+    
+}

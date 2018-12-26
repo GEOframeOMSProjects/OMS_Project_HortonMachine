@@ -1,0 +1,29 @@
+// Aspect - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+        components {
+            "reader_pit"     "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "aspect"         "org.jgrasstools.hortonmachine.modules.geomorphology.aspect.OmsAspect"
+            "writer_aspect"  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_pit.file"           "output/DEM_pitfiller.asc"
+            "aspect.doRadiants"         true
+            "aspect.doRound"            true
+            "writer_aspect.file"        "output/aspectradiants.asc"
+        }
+
+        connect {
+            "reader_pit.outRaster"      "aspect.inElev"
+            "aspect.outAspect"          "writer_aspect.inRaster"
+        }
+
+    }
+
+}

@@ -1,0 +1,30 @@
+// Slope - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+        components {
+            "reader_pit"    "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_flow"   "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "slope"         "org.jgrasstools.hortonmachine.modules.geomorphology.slope.OmsSlope"
+            "writer_slope"  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_pit.file"             "output/DEM_pitfiller.asc"
+            "reader_flow.file"            "output/flow_dir.asc"
+            "slope.doHandleNegativeSlope" false //?? serve
+            "writer_slope.file"           "output/slope.asc"
+        }
+
+        connect {
+            "reader_pit.outRaster"      "slope.inPit"
+            "reader_flow.outRaster"     "slope.inFlow"
+            "slope.outSlope"            "writer_slope.inRaster"
+        }
+
+    }
+}

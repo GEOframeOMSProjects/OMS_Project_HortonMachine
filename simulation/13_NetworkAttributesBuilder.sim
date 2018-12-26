@@ -1,0 +1,84 @@
+// ExtractNetwork
+
+//   • Extracting the network using the contributing areas:
+//      The network is extracted by fixing a threshold on the total contributing areas or on the magnitudo
+//      (output of the Magnitudo command). Using this mode all the pixels with contributing area greater
+//      than the threshold are considered channel. The choice of the threshold value depends on the
+//      characteristics of the soil and on the resolution of the input maps. It is reccommended to do some
+//      tests using different values of the threshold on the TCA and compare the resulting network with the
+//      real. This is the default Thresholding mode Only Tca.
+//      @In tca
+//      @In mark outlet
+//      @In threshold
+//   • Extracting the network using the contributing areas and the slopes
+//      The network is extracted by fixing a threshold on the product of two quantities, for example, the
+//      contributing areas and the slope. First of all you need to calculate the map of slopes using the
+//      function Gradient.
+//      It is possible to proceed with the network extraction by fixing a threshold on the product of the TCA
+//      and Gradient. The choice of the threshold value depends on the characteristics of the soil and on the
+//      resolution of the input maps. It is reccommended to do some tests using different values of the
+//      threshold on the TCA and compare the resulting network with the real one. 
+//      @In tca
+//      @In mark outlet
+//      @In slope
+//      @In threshold
+//   • Extracting the network using the curvatures
+//      The network is extracted by fixing a threshold on the product of the total contributing areas and
+//      slope but only in convergent sites. To execute this operation first of all you need to calculate the
+//      map of curvatures using the function Curvatures and then you have to distinguish the different
+//      topographic classes (concave, convex and planar sites) with the command Tc.
+//      It is possible to proceed with the network extraction by fixing a threshold on the product of TCA
+//      and Slope and considering only the concave sites from the Tc map of the 3 aggregated topographic
+//      classes. The choice of the threshold value depends on the characteristics of the soil and on the 
+//      resolution of the input maps. It is reccommended to do some tests using different values of the 
+//      threshold on the TCA and compare the resulting network with the real.
+//      @In tca
+//      @In mark outlet
+//      @In tc3
+//      @In threshold
+
+// From: The HortonMachine - A tutorial for the processing of the digital terrain data, A. Antonello, S. Franceshi, and R. Rigon
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components { 
+            "reader_tca"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_flow"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_slope"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_tc3"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "extract_net"				  "org.jgrasstools.hortonmachine.modules.network.extractnetwork.OmsExtractNetwork"       
+            "writer_net"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter{
+            "reader_tca.file"       "output/tca.asc"
+            "reader_flow.file"      "output/mark_outlet.asc"
+            //"reader_slope.file"   "output/slope.asc"
+            //"reader_tc3.file"     "output/tc3.asc"
+         
+            // "tca",  "tca and slope" or "tca in convergent sites"
+            "extract_net.pMode"		"tca"
+            "extract_net.pThres"    2000
+
+            "writer_net.file"       "output/network_2000.asc"
+        }
+    
+        connect {
+            "reader_tca.outRaster"   	"extract_net.inTca"
+            "reader_flow.outRaster"     "extract_net.inFlow"
+            //"reader_slope.outRaster"  "extract_net.inSlope"
+            //"reader_tc3.outRaster"    "extract_net.inTc3"
+            "extract_net.outNet"		"writer_net.inRaster"
+        }
+
+    }
+    
+}
+
+

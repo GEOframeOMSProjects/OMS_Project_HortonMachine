@@ -1,0 +1,34 @@
+// Curvatures - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+     
+        components {
+            "reader_pit"            "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "curvature"             "org.jgrasstools.hortonmachine.modules.geomorphology.curvatures.OmsCurvatures"
+            "writer_longitudinal"   "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+            "writer_planar"         "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+            "writer_tangential"     "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_pit.file"              "output/DEM_pitfiller.asc"
+            "writer_longitudinal.file"     "output/c_longitudinal.asc"
+            "writer_planar.file"           "output/c_planar.asc"
+            "writer_tangential.file"       "output/c_tangential.asc"
+        }
+
+        connect {
+            "reader_pit.outRaster"     "curvature.inElev"
+            "curvature.outProf"        "writer_longitudinal.inRaster"
+            "curvature.outPlan"        "writer_planar.inRaster"
+            "curvature.outTang"        "writer_tangential.inRaster"
+        }
+
+    }
+
+}

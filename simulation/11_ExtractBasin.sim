@@ -1,0 +1,51 @@
+// ExtractBasin
+
+// ExtractBasin extracts a watershed from a map of flow directions given the position of the outlet
+
+// @In coordinates of the basin output, please note that the output has to belong to the network
+// @In drain direction
+// @Out raster map of the basin mask
+// @Out shapefile of the outlet
+// @Out shapefile of the basin boundaries
+// @Out basin area
+
+// From: The HortonMachine - A tutorial for the processing of the digital terrain data, A. Antonello, S. Franceshi, and R. Rigon
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components { 
+            "reader_drain"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "extract_basin"				  "org.jgrasstools.hortonmachine.modules.demmanipulation.wateroutlet.OmsExtractBasin"       
+            "writer_mask"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+            //"writer_vector_outlet"        "org.jgrasstools.gears.io.vectorwriter.OmsVectorWriter"
+            //"writer_vector_mask"          "org.jgrasstools.gears.io.vectorwriter.OmsVectorWriter"
+        }
+
+        parameter{
+            "reader_drain.file"         "output/drain_dir.asc"
+            "extract_basin.pNorth"      5130647				
+            "extract_basin.pEast"       644591
+            "writer_mask.file"          "output/mask.asc"
+            //"writer_vector_outlet"      "output/v_outlet.shp"
+            //"writer_vector_mask"        "output/v_mask.shp"
+        }
+    
+        connect {
+            "reader_drain.outRaster"   	"extract_basin.inFlow"
+			null                        "extract_basin.inNetwork"
+            "extract_basin.outBasin"    "writer_mask.inRaster" 
+            //"extract_basin.outoutlet"  "writer_vector_outlet.inVector"
+            //"extract_basin.outVectorBasin" "writer_vector_mask.inVector"
+        }
+
+    }
+    
+}
+
+

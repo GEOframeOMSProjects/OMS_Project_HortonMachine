@@ -1,0 +1,29 @@
+// Markoutlets - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components {
+            "reader_flow"        "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "mark_outlet"        "org.jgrasstools.hortonmachine.modules.demmanipulation.markoutlets.OmsMarkoutlets"
+            "writer_mark"        "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_flow.file"       "output/drain_dir.asc"
+            "writer_mark.file"       "output/mark_outlet.asc"
+        }
+
+        connect {
+            "reader_flow.outRaster"   "mark_outlet.inFlow"   
+            "mark_outlet.outFlow"     "writer_mark.inRaster"
+        }
+
+    }
+
+}

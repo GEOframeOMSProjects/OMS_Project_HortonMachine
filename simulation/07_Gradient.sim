@@ -1,0 +1,29 @@
+// Gradient - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+        components {
+            "reader_pit"       "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "gradient"         "org.jgrasstools.hortonmachine.modules.geomorphology.gradient.OmsGradient"
+            "writer_gradient"  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_pit.file"           "output/DEM_pitfiller.asc"
+            //"gradient.pMode"            "FINITE_DIFFERENCES"
+            "gradient.doDegrees"        true
+            "writer_gradient.file"      "output/gradient.asc"
+        }
+
+        connect {
+            "reader_pit.outRaster"      "gradient.inElev"
+            "gradient.outSlope"         "writer_gradient.inRaster"
+        }
+
+    }
+
+}

@@ -1,0 +1,37 @@
+// Tc - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components {
+            "reader_c_longitudinal"     "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_c_tangential"       "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "tc"                        "org.jgrasstools.hortonmachine.modules.hillslopeanalyses.tc.OmsTc"
+            "writer_tc3"                "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+            "writer_tc9"                "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"     
+        }
+
+        parameter {
+            "reader_c_longitudinal.file"   "output/c_longitudinal.asc"
+            "reader_c_tangential.file"     "output/c_tangential.asc"
+            "tc.pProfthres"                0.001
+            "tc.pTanthres"                 0.001
+            "writer_tc3.file"              "output/tc3.asc"
+            "writer_tc9.file"              "output/tc9.asc"
+        }
+    
+        connect {
+            "reader_c_longitudinal.outRaster"  "tc.inProf"
+            "reader_c_tangential.outRaster"    "tc.inTan"
+            "tc.outTc9"                        "writer_tc9.inRaster"
+            "tc.outTc3"                        "writer_tc3.inRaster"
+        }
+
+    }
+
+}

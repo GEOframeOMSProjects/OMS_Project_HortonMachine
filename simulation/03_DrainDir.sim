@@ -1,0 +1,40 @@
+// DrainDir  - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+    resource "$oms_prj/lib"
+    model() {
+
+
+        components {
+            "reader_pit"           "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "reader_flow"          "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            "drain_dir"            "org.jgrasstools.hortonmachine.modules.geomorphology.draindir.OmsDrainDir"
+            "writer_drain_dir"     "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+            "writer_tca"           "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        }
+
+        parameter {
+            "reader_pit.file"      "output/DEM_pitfiller.asc"
+            "reader_flow.file"     "output/flow_dir.asc"
+
+            // method D8-LAD - optional
+            //"drain_dir.doLad"             true
+            //"drain_dir.pLambda"           1
+         
+            "writer_drain_dir.file"  "output/drain_dir.asc"
+            "writer_tca.file"        "output/tca.asc"
+        }
+
+        connect {
+            "reader_pit.outRaster"     "drain_dir.inPit"
+            "reader_flow.outRaster"    "drain_dir.inFlow"       
+            "drain_dir.outFlow"        "writer_drain_dir.inRaster"
+            "drain_dir.outTca"         "writer_tca.inRaster"
+        }
+
+    }
+    
+}
