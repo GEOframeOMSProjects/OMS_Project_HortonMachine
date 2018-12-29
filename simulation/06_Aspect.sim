@@ -14,9 +14,9 @@ OMS3.sim {
 
         parameter {
             "reader_pit.file"           "output/DEM_pitfiller.asc"
-            "aspect.doRadiants"         true
+            "aspect.doRadiants"         false
             "aspect.doRound"            true
-            "writer_aspect.file"        "output/aspectradiants.asc"
+            "writer_aspect.file"        "output/aspect.asc"
         }
 
         connect {

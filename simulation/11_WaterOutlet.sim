@@ -1,0 +1,33 @@
+// WaterOutlet - HortonMachine library
+
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+OMS3.sim {
+
+   resource "$oms_prj/lib"
+   model() {
+
+
+      components {
+          "reader_flow"    "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+          "outlet"         "org.jgrasstools.hortonmachine.modules.demmanipulation.wateroutlet.OmsWateroutlet"
+          "writer_basin"   "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+      }
+ 
+      parameter {
+          "reader_flow.file"  "output/mark_outlet.asc"
+          "outlet.pNorth"     5130647  					
+          "outlet.pEast"      644591
+          "writer_basin.file" "output/mask.asc"
+      }
+   
+      connect {
+          "reader_flow.outRaster"  "outlet.inFlow"
+          "outlet.outBasin"        "writer_basin.inRaster"
+      }
+
+  }
+
+}
+
+
