@@ -15,8 +15,8 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_flow.file"       "output/drain_dir.asc"
-            "writer_mark.file"       "output/mark_outlet.asc"
+            "reader_flow.file"       "output/cutout_drain_dir.asc"
+            "writer_mark.file"       "output/cutout_mark_outlet.asc"
         }
 
         connect {
