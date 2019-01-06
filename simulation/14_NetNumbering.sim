@@ -1,0 +1,71 @@
+import static oms3.SimBuilder.instance as OMS3
+def home = oms_prj
+
+
+OMS3.sim {
+
+resource "$oms_prj/lib"
+
+ model() {
+ 
+ //Il comando permette di estrarre i sottobacini, oltre alla mappa della rete numerata.
+ 
+ 
+   components {
+  
+  
+        //"reader_tca"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+        "reader_flow"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+        "reader_net"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+        //"vreader_station"                      "org.jgrasstools.gears.io.shapefile.OmsShapefileFeatureReader"
+        "net_number"				  "org.jgrasstools.hortonmachine.modules.network.netnumbering.OmsNetNumbering"       
+        "writer_net_number"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_subbasin"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+
+
+            
+         
+   }
+
+  
+   parameter{
+   
+         //"reader_tca.file"                      "${home}/output/cutout_tca.asc"
+         "reader_flow.file"                     "${home}/output/cutout_mark_outlet.asc"
+         "reader_net.file"                      "${home}/output/cutout_network_2000.asc"
+
+
+	     // soglia sul numero di pixel da considerare per la definizione dei sottobacini
+         "net_number.pThres"		0
+         
+         
+         // eventuale shape di punti da considerare per la definizione dei sottobacini
+         //"vreader_station.file"                 "${home}/data/centroids_netnum_1.shp"
+         
+         
+         // numerazione della rete
+         "writer_net_number.file"						"${home}/output/cutout_net_number1000_cut.asc"
+         
+         // sottobacini
+         "writer_subbasin.file"						"${home}/output/cutout_subbasins1000_cut.asc"
+
+
+        
+   }
+    connect {
+        
+        //"reader_tca.outRaster"                 		"net_number.inTca"
+        "reader_flow.outRaster"                     "net_number.inFlow"
+        "reader_net.outRaster"                 	    "net_number.inNet"
+        //"vreader_station.geodata"                   "net_number.inPoints"
+        
+        
+        "net_number.outNetnum"			   			 "writer_net_number.inRaster"
+        "net_number.outBasins"			   			 "writer_subbasin.inRaster"
+
+   }
+
+ }
+}
+
+
