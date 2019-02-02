@@ -16,10 +16,10 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_pit.file"              "output/DEM_pitfiller.asc"
-            "writer_longitudinal.file"     "output/c_longitudinal.asc"
-            "writer_planar.file"           "output/c_planar.asc"
-            "writer_tangential.file"       "output/c_tangential.asc"
+            "reader_pit.file"              "output/DEM_pitfiller.tif"
+            "writer_longitudinal.file"     "output/c_longitudinal.tif"
+            "writer_planar.file"           "output/c_planar.tif"
+            "writer_tangential.file"       "output/c_tangential.tif"
         }
 
         connect {

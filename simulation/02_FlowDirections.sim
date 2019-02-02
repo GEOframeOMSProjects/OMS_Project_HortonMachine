@@ -15,8 +15,8 @@ OMS3.sim {
        }
 
        parameter{
-           "reader_pit.file"    "output/DEM_pitfiller.asc"
-           "writer_flow.file"	  "output/flow_dir.asc"
+           "reader_pit.file"    "output/DEM_pitfiller.tif"
+           "writer_flow.file"   "output/flow_dir.tif"
        }
 
        connect {

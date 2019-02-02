@@ -8,23 +8,23 @@ OMS3.sim {
 	model() {
 
 
- 		components {    
+ 		components {
  			"reader_raster"				"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"      
  			"reader_mask"				"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"       
- 			"cutout"						"org.jgrasstools.gears.modules.r.cutout.OmsCutOut"
+ 			"cutout"					"org.jgrasstools.gears.modules.r.cutout.OmsCutOut"
  			"writer_mapcut"				"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"                     
  		}  
  		
- 		parameter {   
- 			"reader_raster.file"			"${home}/output/DEM_pitfiller.asc" 			        
- 			"reader_mask.file"			"${home}/output/mask.asc"         
- 			"writer_mapcut.file"			"${home}/output/cutout_DEM_pitfiller.asc"        
+ 		parameter {
+ 			"reader_raster.file"		"${home}/output/mark_outlet.tif"
+ 			"reader_mask.file"			"${home}/output/mask.tif"
+ 			"writer_mapcut.file"		"${home}/output/cutout_mark_outlet.tif"
  		}
  			
-		connect {        
- 			"reader_raster.outRaster"		"cutout.inRaster"   
- 			"reader_mask.outRaster"		"cutout.inMask"       
- 			"cutout.outRaster"			"writer_mapcut.inRaster" 				
+		connect {
+ 			"reader_raster.outRaster"	"cutout.inRaster"
+ 			"reader_mask.outRaster"		"cutout.inMask"
+ 			"cutout.outRaster"			"writer_mapcut.inRaster"
 		}
 	}
 }

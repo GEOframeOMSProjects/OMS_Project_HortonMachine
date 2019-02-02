@@ -17,12 +17,12 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_c_longitudinal.file"   "output/c_longitudinal.asc"
-            "reader_c_tangential.file"     "output/c_tangential.asc"
+            "reader_c_longitudinal.file"   "output/c_longitudinal.tif"
+            "reader_c_tangential.file"     "output/c_tangential.tif"
             "tc.pProfthres"                0.001
             "tc.pTanthres"                 0.001
-            "writer_tc3.file"              "output/tc3.asc"
-            "writer_tc9.file"              "output/tc9.asc"
+            "writer_tc3.file"              "output/tc3.tif"
+            "writer_tc9.file"              "output/tc9.tif"
         }
     
         connect {

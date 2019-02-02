@@ -15,10 +15,10 @@ OMS3.sim {
       }
  
       parameter {
-          "reader_flow.file"  "output/mark_outlet.asc"
-          "outlet.pNorth"     5130647  					
+          "reader_flow.file"  "output/mark_outlet.tif"
+          "outlet.pNorth"     5130647
           "outlet.pEast"      644591
-          "writer_basin.file" "output/mask.asc"
+          "writer_basin.file" "output/mask.tif"
       }
    
       connect {

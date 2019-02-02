@@ -4,7 +4,7 @@ import static oms3.SimBuilder.instance as OMS3
 def home = oms_prj
 OMS3.sim {
 
-    resource "$oms_prj/lib"
+    //resource "$oms_prj/libNew"
     model() {
 
 
@@ -16,7 +16,7 @@ OMS3.sim {
 
         parameter{  
             "reader_dem.file"     "data/DEM_Meledrio.tif"
-            "writer_pit.file"     "output_tiff/DEM_pitfiller.tif"
+            "writer_pit.file"     "output/DEM_pitfiller.tif"
         }
 
         connect {

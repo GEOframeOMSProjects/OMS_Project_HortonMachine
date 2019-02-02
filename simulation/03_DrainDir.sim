@@ -17,15 +17,15 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_pit.file"      "output/DEM_pitfiller.asc"
-            "reader_flow.file"     "output/flow_dir.asc"
+            "reader_pit.file"      "output/DEM_pitfiller.tif"
+            "reader_flow.file"     "output/flow_dir.tif"
 
             // method D8-LAD - optional
             //"drain_dir.doLad"             true
             //"drain_dir.pLambda"           1
          
-            "writer_drain_dir.file"  "output/drain_dir.asc"
-            "writer_tca.file"        "output/tca.asc"
+            "writer_drain_dir.file"  "output/drain_dir.tif"
+            "writer_tca.file"        "output/tca.tif"
         }
 
         connect {

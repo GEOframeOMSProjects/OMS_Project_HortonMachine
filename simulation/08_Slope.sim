@@ -14,10 +14,10 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_pit.file"             "output/DEM_pitfiller.asc"
-            "reader_flow.file"            "output/mark_outlet.asc"
-            "slope.doHandleNegativeSlope" false //?? serve
-            "writer_slope.file"           "output/slope.asc"
+            "reader_pit.file"             "output/DEM_pitfiller.tif"
+            "reader_flow.file"            "output/mark_outlet.tif"
+            "slope.doHandleNegativeSlope" false 
+            "writer_slope.file"           "output/slope.tif"
         }
 
         connect {

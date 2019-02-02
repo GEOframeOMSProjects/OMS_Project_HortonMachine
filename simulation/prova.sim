@@ -1,0 +1,131 @@
+import static oms3.SimBuilder.instance as OMS3
+import static oms3.SimBuilder.*
+
+def home = oms_prj
+def output_path = "output/Prova_simfile_nopit"
+def basin       = "Prova_nopit"
+def pTres       = 2000
+
+OMS3.sim {
+resource "$oms_prj/lib"
+ model() {
+ 
+   components {  
+    	// Reader
+        "reader_pit"            	  "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+     
+        // Components
+        "flow_directions"			  "org.jgrasstools.hortonmachine.modules.geomorphology.flow.OmsFlowDirections"
+        "drain_dir"			  		  "org.jgrasstools.hortonmachine.modules.geomorphology.draindir.OmsDrainDir"
+        "mark_outlet"			  	  "org.jgrasstools.hortonmachine.modules.demmanipulation.markoutlets.OmsMarkoutlets"
+        "slope"			  		      "org.jgrasstools.hortonmachine.modules.geomorphology.slope.OmsSlope"
+        "curvature"			  		  "org.jgrasstools.hortonmachine.modules.geomorphology.curvatures.OmsCurvatures"
+        "tc"			  			  "org.jgrasstools.hortonmachine.modules.hillslopeanalyses.tc.OmsTc"
+        "extract_net"				  "org.jgrasstools.hortonmachine.modules.network.extractnetwork.OmsExtractNetwork"       
+       
+        
+        // Writers 
+        "writer_flow"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"  
+        "writer_drain_dir"            "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_tca"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"  
+        "writer_mark"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_slope"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_longitudinale"        "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_planare"              "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+		"writer_tangenziale"          "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_tc3"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_tc9"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+        "writer_net"            	  "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+		
+   }	
+   parameter{  
+   		 // Input file's path
+        "reader_dem.file"                        "${home}/output/Geomorpho/DEM_pitfiller.asc"
+         
+         // Components
+         // metodo D8-LAD
+         "drain_dir.doLad"                     true
+         "drain_dir.pLambda"			1
+         
+         // Threshold to define planarity.
+         "tc.pProfthres"								 0.001
+    	 "tc.pTanthres" 							     0.001
+
+		 // "tca",  "tca and slope" or "tca in convergent sites"
+         "extract_net.pMode"		  "tca"
+         
+         // specificare la soglia della mappa 
+         "extract_net.pThres"		pTres
+         
+         
+         // Output files' path
+         "writer_flow.file"						"${home}/${output_path}/flow_dir.asc"
+         "writer_drain_dir.file"				"${home}/${output_path}/drain_dir.asc"
+         "writer_tca.file"					    "${home}/${output_path}/Tca.asc"
+         "writer_mark.file"						"${home}/${output_path}/mark_outlet.asc"
+         "writer_slope.file"					"${home}/${output_path}/slope.asc"
+         "writer_longitudinale.file"			"${home}/${output_path}/c_longitudinale.asc"
+         "writer_planare.file"					"${home}/${output_path}/c_planare.asc"
+         "writer_tangenziale.file"				"${home}/${output_path}/c_tangenziale.asc"
+         "writer_tc3.file"						"${home}/${output_path}/tc3.asc"
+         "writer_tc9.file"						"${home}/${output_path}/tc9.asc"
+         "writer_net.file"						"${home}/${output_path}/network_${pTres}.asc"
+         
+}
+    connect {      
+        // Connect components
+                
+        // flow_directions
+        "reader_pit.outRaster"                 "flow_directions.inPit"
+        
+        // drain_dir
+        "reader_pit.outRaster"                 "drain_dir.inPit"
+        "flow_directions.outFlow"              "drain_dir.inFlow"  
+        
+        // mark_outlet
+        "drain_dir.outFlow"                    "mark_outlet.inFlow"
+        
+        // slope
+        "reader_pit.outRaster"                 "slope.inPit"
+        "flow_directions.outFlow"              "slope.inFlow"
+        
+        // curvature
+        "reader_pit.outRaster"                 "curvature.inElev"  
+        
+        // tc
+        "curvature.outProf"                    "tc.inProf"
+        "curvature.outTang"                    "tc.inTan"   
+        
+        // network
+        "drain_dir.outTca"                 	   "extract_net.inTca"
+        "mark_outlet.outFlow"                  "extract_net.inFlow"
+        //"slope.outSlope"                     "extract_net.inSlope"
+        //"tc.outTc3"                 	       "extract_net.inTc3"
+        
+        
+               
+        // Connect writers
+        
+        "flow_directions.outFlow"              "writer_flow.inRaster"
+        
+        "drain_dir.outFlow"			           "writer_drain_dir.inRaster"
+        "drain_dir.outTca"			   		   "writer_tca.inRaster"
+        
+        "mark_outlet.outFlow"			       "writer_mark.inRaster"
+        
+        "slope.outSlope"			   		   "writer_slope.inRaster"
+        
+        "curvature.outProf"			   		   "writer_longitudinale.inRaster"
+        "curvature.outPlan"			   		   "writer_planare.inRaster"
+        "curvature.outTang"			   		   "writer_tangenziale.inRaster"
+        
+        "tc.outTc9"			   			       "writer_tc9.inRaster"
+        "tc.outTc3"			   			       "writer_tc3.inRaster"
+        
+        "extract_net.outNet"			   	   "writer_net.inRaster"  
+        
+	}
+ }
+}
+
+

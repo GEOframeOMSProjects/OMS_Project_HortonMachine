@@ -11,23 +11,23 @@ OMS3.sim {
         components { 
             "reader_tca"       "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
             "reader_flow"      "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
-            //"reader_slope"     "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
-            //"reader_tc3"       "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            //"reader_slope"   "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+            //"reader_tc3"     "org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
             "extract_net"      "org.jgrasstools.hortonmachine.modules.network.extractnetwork.OmsExtractNetwork"       
             "writer_net"       "org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
         }
 
         parameter{
-            "reader_tca.file"       "output/tca.asc"
-            "reader_flow.file"      "output/mark_outlet.asc"
-            //"reader_slope.file"   "output/slope.asc"
-            //"reader_tc3.file"     "output/tc3.asc"
+            "reader_tca.file"       "output/tca.tif"
+            "reader_flow.file"      "output/mark_outlet.tif"
+            //"reader_slope.file"   "output/slope.tif"
+            //"reader_tc3.file"     "output/tc3.tif"
          
             // "tca",  "tca and slope" or "tca in convergent sites"
             "extract_net.pMode"    "tca"
             "extract_net.pThres"   2000
 
-            "writer_net.file"      "output/network_2000.asc"
+            "writer_net.file"      "output/network_2000.tif"
         }
 
         connect {

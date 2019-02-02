@@ -12,8 +12,8 @@ OMS3.sim {
 		components {
 			"reader_drain"			"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
 			"reader_hack"			"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
-			"splitsubbasins"			"org.jgrasstools.hortonmachine.modules.demmanipulation.splitsubbasin.OmsSplitSubbasins"
-			"writer_net_num"			"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
+			"splitsubbasins"		"org.jgrasstools.hortonmachine.modules.demmanipulation.splitsubbasin.OmsSplitSubbasins"
+			"writer_net_num"		"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
 			"writer_subbasins"		"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
 		}
 

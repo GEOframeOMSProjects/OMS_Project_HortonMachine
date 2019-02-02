@@ -13,10 +13,9 @@ OMS3.sim {
         }
 
         parameter {
-            "reader_pit.file"           "output/DEM_pitfiller.asc"
-            //"gradient.pMode"            "FINITE_DIFFERENCES"
+            "reader_pit.file"           "output/DEM_pitfiller.tif"
             "gradient.doDegrees"        true
-            "writer_gradient.file"      "output/gradient.asc"
+            "writer_gradient.file"      "output/gradient.tif"
         }
 
         connect {
