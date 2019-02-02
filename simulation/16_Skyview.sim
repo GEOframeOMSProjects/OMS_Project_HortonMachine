@@ -16,8 +16,8 @@ OMS3.sim {
 		}  
 		
 		parameter {   
-			"reader_pit.file"        "${home}/output/cutout_DEM_pitfiller.asc"				         
-			"writer_skyview.file"	    "${home}/output/cutout_skyview.asc"        
+			"reader_pit.file"        "${home}/output/cutout_DEM_pitfiller.tif"				         
+			"writer_skyview.file"	 "${home}/output/cutout_skyview.tif"        
 		}
 		
 		connect {        

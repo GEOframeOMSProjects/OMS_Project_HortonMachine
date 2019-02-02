@@ -18,11 +18,11 @@ OMS3.sim {
 		}
 
 		parameter	{
-			"reader_drain.file"			"${home}/output/cutout_drain_dir.asc"
-			"reader_hack.file"			"${home}/output/cutout_hack_cut.asc"
-			"splitsubbasins.pHackorder"	4
-			"writer_net_num.file"			"${home}/output/cutout_net_numbering.asc"
-			"writer_subbasins.file"		"${home}/output/cutout_subbasins.asc"
+			"reader_drain.file"			"${home}/output/cutout_drain_dir.tif"
+			"reader_hack.file"			"${home}/output/cutout_hack_10000.tif"
+			"splitsubbasins.pHackorder"	3
+			"writer_net_num.file"			"${home}/output/cutout_net_numbering_10000.tif"
+			"writer_subbasins.file"		"${home}/output/cutout_subbasins_10000.tif"
 		}
 
 		connect	{

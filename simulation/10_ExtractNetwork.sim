@@ -25,9 +25,9 @@ OMS3.sim {
          
             // "tca",  "tca and slope" or "tca in convergent sites"
             "extract_net.pMode"    "tca"
-            "extract_net.pThres"   2000
+            "extract_net.pThres"   10000
 
-            "writer_net.file"      "output/network_2000.tif"
+            "writer_net.file"      "output/network_10000.tif"
         }
 
         connect {

@@ -22,11 +22,11 @@ OMS3.sim {
 		parameter	{
 			"reader_tca.file"				"${home}/output/cutout_tca.tif"
 			"reader_flow.file"				"${home}/output/cutout_drain_dir.tif"
-			"reader_net.file"				"${home}/output/cutout_network_2000.tif"
+			"reader_net.file"				"${home}/output/cutout_network_10000.tif"
 			"reader_pit.file"				"${home}/output/cutout_DEM_pitfiller.tif"												
 			"net_attributes_builder.doHack"	true
-			"writer_hack.file"				"${home}/output/cutout_hack_cut.tif"
-			"writer_net.file"				"${home}/output/cutout_network_2000.shp"
+			"writer_hack.file"				"${home}/output/cutout_hack_10000.tif"
+			"writer_net.file"				"${home}/output/cutout_network_10000.shp"
 		}
 
 		connect	{

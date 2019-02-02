@@ -10,21 +10,21 @@ OMS3.sim {
 
 
 		components {  
-        		"reader_tca"			"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+        		"reader_tca"		"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
         		"reader_slope"		"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
         		"top_index"			"org.jgrasstools.hortonmachine.modules.basin.topindex.OmsTopIndex"       
         		"writer_top_index"	"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
 		}  
 		
          parameter {   
-			"reader_tca.file"			"${home}/output/cutout_tca.asc"         
-        		"reader_slope.file"			"${home}/output/cutout_slope.asc"
-        		"writer_top_index.file"		"${home}/output/cutout_top_index.asc"        
+			"reader_tca.file"				"${home}/output/cutout_tca.tif"
+        		"reader_slope.file"			"${home}/output/cutout_slope.tif"
+        		"writer_top_index.file"		"${home}/output/cutout_top_index.tif"
         	}
         	
 		connect {        
-			"reader_tca.outRaster"		"top_index.inTca"
-        		"reader_slope.outRaster"		"top_index.inSlope"    
+			"reader_tca.outRaster"			"top_index.inTca"
+        		"reader_slope.outRaster"	"top_index.inSlope"    
         		"top_index.outTopindex"		"writer_top_index.inRaster"
         	}
         	

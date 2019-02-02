@@ -16,9 +16,9 @@ OMS3.sim {
  		}  
  		
  		parameter {
- 			"reader_raster.file"		"${home}/output/mark_outlet.tif"
+ 			"reader_raster.file"		"${home}/output/network_10000.tif"
  			"reader_mask.file"			"${home}/output/mask.tif"
- 			"writer_mapcut.file"		"${home}/output/cutout_mark_outlet.tif"
+ 			"writer_mapcut.file"		"${home}/output/cutout_network_10000.tif"
  		}
  			
 		connect {

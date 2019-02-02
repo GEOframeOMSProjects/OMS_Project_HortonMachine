@@ -10,21 +10,21 @@ OMS3.sim {
 
 		components {
 			"reader_flow"			"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
-			"reader_net"				"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
+			"reader_net"			"org.jgrasstools.gears.io.rasterreader.OmsRasterReader"
 			"rescaled_distance"		"org.jgrasstools.hortonmachine.modules.basin.rescaleddistance.OmsRescaledDistance"       
 			"writer_rescaled"		"org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter"
         }  
         
 		parameter {      
-        		"reader_flow.file"              	"${home}/output/cutout_mark_outlet.asc"         
-        		"reader_net.file"               	"${home}/output/cutout_network_2000.asc"        	         
-        		"rescaled_distance.pRatio"      	10
-        		"writer_rescaled.file"			"${home}/output/cutout_rescaled_distance_r_10.asc"        	        
+        		"reader_flow.file"              "${home}/output/cutout_mark_outlet.tif"         
+        		"reader_net.file"               "${home}/output/cutout_network_2000.tif"        	         
+        		"rescaled_distance.pRatio"      10
+        		"writer_rescaled.file"			"${home}/output/cutout_rescaled_distance_r_10.tif"        	        
         	}
         	
         	connect {        
-        		"reader_flow.outRaster"     	    "rescaled_distance.inFlow"
-        		"reader_net.outRaster"      	    "rescaled_distance.inNet"
+        		"reader_flow.outRaster"     	"rescaled_distance.inFlow"
+        		"reader_net.outRaster"      	"rescaled_distance.inNet"
         		"rescaled_distance.outRescaled"	"writer_rescaled.inRaster"
         	}        		
         	
