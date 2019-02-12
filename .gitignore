@@ -2,3 +2,4 @@ maps/
 note.txt
 qgis/
 *.tif.aux.xml
+build.xml
